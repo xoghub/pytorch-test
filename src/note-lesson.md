@@ -1,6 +1,6 @@
 # Lesson Noted of PyTorch Specialization Course
 
-The ML Pipeline
+# The ML Pipeline
 
 - Data Ingestion
   - raw data collection
@@ -70,6 +70,25 @@ DataLoader(dataset, batch_size=64, shuffle=True)
 `shuffle` mean shuffle the data or not
 
 `DataLoader` mean function to load data with batching
+
+### Full Data Pipeline
+
+```python
+# define transform of data
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((mean,), (std,))
+])
+# create dataset with transform
+dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+# load the dataset with DataLoader
+DataLoader(dataset, batch_size=64, shuffle=True)
+
+# training models with data
+for batch, (data, labels) in enumerate(dataloader):
+    # model process batch of data transformed
+    output = model(data)
+```
 
 ## Model
 
@@ -194,22 +213,3 @@ print(f'Accuracy of the model on the 10000 test images: {100 * correct / total}%
 `predicted` mean predicted label
 
 `labels` mean true label
-
-## Full Data Pipeline
-
-```python
-# define transform of data
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((mean,), (std,))
-])
-# create dataset with transform
-dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-# load the dataset with DataLoader
-DataLoader(dataset, batch_size=64, shuffle=True)
-
-# training models with data
-for batch, (data, labels) in enumerate(dataloader):
-    # model process batch of data transformed
-    output = model(data)
-```

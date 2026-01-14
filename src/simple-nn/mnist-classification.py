@@ -31,8 +31,8 @@ transform = transforms.Compose([
     transforms.Normalize((0.5,), (0.5,))
 ])
 
-train_dataset = torchvision.datasets.MNIST(root='../src/data', train=True, download=True, transform=transform)
-test_dataset = torchvision.datasets.MNIST(root='../src/data', train=False, download=True, transform=transform)
+train_dataset = torchvision.datasets.MNIST(root='./src/data/', train=True, download=True, transform=transform)
+test_dataset = torchvision.datasets.MNIST(root='./src/data/', train=False, download=True, transform=transform)
 
 train_loader = data.DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = data.DataLoader(test_dataset, batch_size=64, shuffle=False)
